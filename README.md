@@ -8,11 +8,12 @@ SplitText, Lenis) et les polices (Young Serif, Hanken Grotesk) sont hébergées 
 
 ## Déploiement (GitHub Pages)
 
-Le site est publié par GitHub Pages depuis la branche `main`, à la racine du dépôt (fichier `.nojekyll` présent : aucun build, les fichiers sont servis tels quels).
-Adresse : <https://loopifyagency.github.io/site-la-maison-marann/> — tous les chemins du site sont relatifs, il fonctionne donc aussi bien dans ce sous-dossier que sur un domaine personnalisé.
+Le site est publié par un workflow GitHub Actions (`.github/workflows/pages.yml`) à chaque fusion dans `main`.
+Il ne publie que les fichiers du site (`index.html`, `robots.txt`, `css/`, `js/`, `assets/`), pas les dossiers d'outils ni les documents internes.
+Adresse : <https://loopifyagency.github.io/site-la-maison-marann/> — tous les chemins sont relatifs : le site fonctionne dans ce sous-dossier comme sur un domaine personnalisé.
 
-Réglage (une seule fois) : *Settings → Pages → Build and deployment → Source : Deploy from a branch → `main` / `(root)`*.
-Chaque fusion dans `main` redéploie le site.
+Réglage (une seule fois) : *Settings → Pages → Build and deployment → Source : **GitHub Actions***.
+Relance manuelle : onglet *Actions → Déploiement GitHub Pages → Run workflow*.
 
 ## Voir le site en local
 
