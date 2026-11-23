@@ -1,0 +1,51 @@
+name: Déploiement GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # relance manuelle : onglet Actions → Run workflow
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Une seule publication à la fois ; on laisse finir celle en cours.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Configurer Pages
+        uses: actions/configure-pages@v5
+
+      # Site statique : on ne publie que les fichiers du site
+      # (pas les dossiers .agents / .claude, ni DESIGN.md, README.md, skills-lock.json).
+      - name: Assembler le site
+        run: |
+          mkdir _site
+          cp -r index.html robots.txt css js assets _site/
+          touch _site/.nojekyll
+          find _site -type f | sort
+
+      - name: Envoyer l'artefact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Déployer sur GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
