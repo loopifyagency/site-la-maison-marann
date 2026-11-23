@@ -6,6 +6,14 @@ Objectif principal : **prendre rendez-vous** (Planity ou téléphone).
 Site statique : HTML, CSS et JavaScript, **sans étape de build**. Les bibliothèques (GSAP, ScrollTrigger,
 SplitText, Lenis) et les polices (Young Serif, Hanken Grotesk) sont hébergées dans le dépôt : aucun appel à un CDN ni à Google Fonts.
 
+## Déploiement (GitHub Pages)
+
+Le site est publié par GitHub Pages depuis la branche `main`, à la racine du dépôt (fichier `.nojekyll` présent : aucun build, les fichiers sont servis tels quels).
+Adresse : <https://loopifyagency.github.io/site-la-maison-marann/> — tous les chemins du site sont relatifs, il fonctionne donc aussi bien dans ce sous-dossier que sur un domaine personnalisé.
+
+Réglage (une seule fois) : *Settings → Pages → Build and deployment → Source : Deploy from a branch → `main` / `(root)`*.
+Chaque fusion dans `main` redéploie le site.
+
 ## Voir le site en local
 
 ```bash
